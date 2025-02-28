@@ -25,6 +25,17 @@
 	max-width: 100%;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--color_black);
+	font-size: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 a {
 	font-weight: 500;
 	color: var(--color_yellow);
@@ -33,13 +44,6 @@ a {
 
 a:hover {
 	color: var(--color_blue_grey);
-}
-
-body {
-	background-color: var(--color_black);
-	font-size: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 h1 {
@@ -66,9 +70,10 @@ img {
 .search-box {
 	width: 100%;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 	flex-wrap: wrap;
-	margin-bottom: 10vh;
+	margin: 5vh 0;
+	gap: 2vw;
 }
 
 input,
@@ -113,30 +118,48 @@ button:hover {
 	margin: 0 auto;
 }
 
+.news-box ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+	gap: 2vw;
+}
+
 .news-box li {
 	width: 100%;
 	background-color: var(--color_brown_dark);
 	margin: 5vh auto;
 	padding: 20px;
 	border-radius: var(--border-10);
-	/*border: 1px ridge var(--color_white);*/
 }
 
 .img-box {
 	width: 100%;
-	margin: 0 auto;
+	height: 20rem;
 	overflow: hidden;
-	border-radius: var(--border-10);
+	border-radius: var(--border-10) var(--border-10) 0 0;
+}
+
+.img-box img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .news-box li h2 {
+	width: 100%;
+	height: 8rem;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 	background-color: var(--color_coffee);
 	color: var(--color_black);
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	padding: 10px 5px;
+	border-radius: 0 0 var(--border-10) var(--border-10);
 }
 
 .news-box li h3 {
@@ -152,6 +175,14 @@ button:hover {
 	font-size: 1.2rem;
 }
 
+.to-top-button {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 100;
+	cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
 	.search-box {
 		gap: 2vh;
@@ -165,5 +196,9 @@ button:hover {
 	.container,
 	.news-box li {
 		width: 100%;
+	}
+
+	.news-box li h2 {
+		height: fit-content;
 	}
 }

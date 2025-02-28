@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 
-const NewsComponent: React.FC = () => {
+interface INewsComponentProps {
+	searchText: string,
+	lang: string
+}
 
-	type TNewsItem = {
-		author: string,
-		title: string,
-		urlToImage: string,
-		publishedAt: string,
-		description: string
-	}[];
+type TNewsItem = {
+	author: string,
+	title: string,
+	urlToImage: string,
+	publishedAt: string,
+	description: string
+}[];
 
 
+const NewsComponent: React.FC<INewsComponentProps> = (props) => {
 	//* State für gespeicherte Nachrichten-Artikel
 	const [news, setNews] = useState
 		<TNewsItem>
@@ -23,7 +27,7 @@ const NewsComponent: React.FC = () => {
 
 	//* useEffect wird nur einmal beim Laden der Komponente ausgeführt
 	useEffect(() => {
-		fetch(`https://newsapi.org/v2/everything?q=${"apple"}&sortBy=${"popularity"}&language=${"de"}&apiKey=${newsApiKey}`)
+		fetch(`https://newsapi.org/v2/everything?q=${props.searchText}&sortBy=${"popularity"}&language=${props.lang}&apiKey=${newsApiKey}`)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error(`HTTP-Fehler! Status: ${response.status}`);
@@ -38,12 +42,11 @@ const NewsComponent: React.FC = () => {
 			.catch((error) => {
 				setError(error);
 			});
-	}, []);
+	}, [props.searchText, props.lang]);
 
 	//* Falls ein Fehler auftritt, wird eine Fehlermeldung angezeigt
 	if (error) return <p>Fehler: {error}</p>;
 
-	//* JSX-Rückgabe ist **wichtig**, um den Fehler zu vermeiden
 	return (
 
 		<div className="news-box" >
